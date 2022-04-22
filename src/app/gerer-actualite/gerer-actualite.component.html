@@ -1,0 +1,96 @@
+
+  <div class="container" id="main-container">
+  <div class="row">
+   <form  *ngIf="router.url === '/gerer-actualite'" class="form-inline my-2 my-lg-0">
+      <input type="search" (ngModelChange)="searchActualites(key4.value)" #key4="ngModel" ngModel
+       name="key4" id="searchName4" class="form-control mr-sm-2" placeholder="Search actualités..." required>
+    </form>
+    <div *ngFor="let actualite of actualites" class="col-md-6 col-xl-3">
+       <div class="card m-b-30">
+          <div class="card-body row">
+          
+             <div class="col-6 card-title align-self-center mb-0">
+                <h5>{{actualite?.titre}}</h5>
+               
+             </div>
+          </div>
+          <ul class="list-group list-group-flush">
+             <li class="list-group-item"><i class="fa fa-envelope float-right"></i>{{actualite?.message}}</li>
+            
+          </ul>
+          <div   class="card-body">
+             <div class="float-right btn-group btn-group-sm">
+                <a  *ngIf="showModeratorBoard  " (click)="onOpenModal(actualite, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+                <a  *ngIf="showModeratorBoard  " (click)="onOpenModal(actualite, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
+             </div>
+          </div>
+       </div>
+    </div>
+  </div>
+  
+  
+  
+  <!-- Edit Modal -->
+  <div class="modal fade" id="updateActualiteModal" tabindex="-1" role="dialog" aria-labelledby="actualiteEditModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+             <h5 class="modal-title" id="updateActualiteModalLabel">Edit Actualite {{editActualite?.titre}}</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+          </div>
+          <div class="modal-body">
+             <form #editForm="ngForm">
+                <div class="form-group">
+                   <label for="titre">titre</label>
+                   <input type="text" ngModel="{{editActualite?.titre}}" name="titre" class="form-control" id="titre" aria-describedby="messageHelp" placeholder="titre">
+                </div>
+                <input type="hidden" ngModel="{{editActualite?.id}}" name="id" class="form-control" id="id" placeholder="Email">
+               
+                <div class="form-group">
+                   <label for="message">message Address</label>
+                   <input type="text" ngModel="{{editActualite?.message}}" name="message" class="form-control" id="message" placeholder="message">
+                </div>
+            
+              
+                <div class="modal-footer">
+                   <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                   <button (click)="onUpdateActualite(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+                </div>
+             </form>
+          </div>
+       </div>
+    </div>
+  </div>
+  
+  <!-- Delete Modal -->
+  <div class="modal fade" id="deleteActualiteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+             <h5 class="modal-title" id="deleteModelLabel">Delete Actualite</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+          </div>
+          <div class="modal-body">
+             <p>Are you sure you want to delete actualite {{deleteActualite?.titre}}?</p>
+             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button (click)="onDeleteActualite(deleteActualite?.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+             </div>
+          </div>
+       </div>
+    </div>
+  </div>
+  </div>
+  
+  <!-- Notification for no actualites -->
+  <div *ngIf="actualites?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">NO Actualités!</h4>
+    <p>No Actualites were found.</p>
+  </div>
+  </div>
+  

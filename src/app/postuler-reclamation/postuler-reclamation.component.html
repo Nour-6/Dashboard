@@ -1,0 +1,39 @@
+
+       
+         <div class="body">
+            <form #addFor="ngForm" (ngSubmit)="onAddReclamation(addFor)">
+            <div class="form-group" style="margin-top: 90px;">
+
+               <label for="nom">Nom</label>
+               <input type="text" ngModel name="nom" class="form-control" id="nom" placeholder="nom" required>
+            </div>
+
+            <div class="form-group">
+                <label for="prenom">Prenom</label>
+                <input type="text" ngModel name="prenom" class="form-control" id="prenom" placeholder="prenom" required>
+             </div>
+
+
+            <div class="form-group">
+               <label for="email">Email Address</label>
+               <input type="text" ngModel name="email" class="form-control" id="email" placeholder="Email" required>
+            </div>
+
+            <div class="form-group">
+              <label for="telephone">Telephone</label>
+              <input  type="text" ngModel name="telephone" class="form-control" id="telephone" placeholder="telephone"   required/>
+           </div>
+
+           <div class="form-group">
+            <label for="message">Message</label>
+            <input  type="text" ngModel name="message" class="form-control" id="message" placeholder="message"  required/>
+         </div>
+         
+           
+            <div class="footer">
+              
+               <button [disabled]="addFor.invalid" type="submit" class="btn btn-primary" >Save changes</button>
+            </div>
+            </form>
+         </div>
+  
