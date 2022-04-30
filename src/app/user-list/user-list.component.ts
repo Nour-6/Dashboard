@@ -4,7 +4,7 @@ import { Employee } from './employee';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { TokenStorageService } from '../_services/token-storage.service';
-
+import { Router } from '@angular/router'
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
@@ -12,7 +12,9 @@ import { TokenStorageService } from '../_services/token-storage.service';
 })
 export class UserListComponent implements OnInit {
 
-
+  username: string;
+  content: string;
+  isLoggedIn = false
   public employees: Employee[];
   public editEmployee: Employee;
   public deleteEmployee: Employee;
@@ -20,18 +22,23 @@ export class UserListComponent implements OnInit {
   showAdminBoard = false;
   showModeratorBoard = false;
   showUserBoard=false;
-  constructor(private employeeService: EmployeeService,private tokenStorageService: TokenStorageService){}
+  constructor(private tokenStorageService: TokenStorageService,private employeeService: EmployeeService,public router: Router){}
 
   ngOnInit() {
-    this.getEmployees();
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
     const user = this.tokenStorageService.getUser();
-      this.roles = user.roles;
-      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
-      this.showUserBoard= this.roles.includes('ROLE_USER');
+    this.username = user.username;
+    this.roles = user.roles;
+        this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+        this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+        this.showUserBoard= this.roles.includes('ROLE_USER');
+        this.getEmployees();
       
   }
-
+  logout(): void {
+    this.tokenStorageService.signOut();
+    window.location.reload();
+  }
   public getEmployees(): void {
     this.employeeService.getEmployees().subscribe(
       (response: Employee[]) => {
@@ -109,13 +116,16 @@ export class UserListComponent implements OnInit {
     button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');
     if (mode === 'add') {
+      $("#addEmployeeModal").prependTo("body");
       button.setAttribute('data-target', '#addEmployeeModal');
     }
     if (mode === 'edit') {
+      $("#updateEmployeeModal").prependTo("body");
       this.editEmployee = employee;
       button.setAttribute('data-target', '#updateEmployeeModal');
     }
     if (mode === 'delete') {
+      $("#deleteEmployeeModal").prependTo("body");
       this.deleteEmployee = employee;
       button.setAttribute('data-target', '#deleteEmployeeModal');
     }

@@ -20,21 +20,22 @@ export class GererEvenementComponent implements OnInit {
   showAdminBoard = false;
   showModeratorBoard = false;
   showUserBoard=false;
-  constructor(private evenementService: EvenementService,private tokenStorageService: TokenStorageService,public router:Router){}
+  constructor(private Evenementservice: EvenementService,private tokenStorageService: TokenStorageService,public router:Router){}
 
   ngOnInit() {
     this.getEvenements();
     const user = this.tokenStorageService.getUser();
+    if(user!=null){
       this.roles = user.roles;
 
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
       this.showUserBoard= this.roles.includes('ROLE_USER');
-      
+    }
   }
 
   public getEvenements(): void {
-    this.evenementService.getEvenements().subscribe(
+    this.Evenementservice.getEvenements().subscribe(
       (response: Evenement[]) => {
         this.evenements = response;
         console.log(this.evenements);
@@ -48,7 +49,7 @@ export class GererEvenementComponent implements OnInit {
   public onAddEvenement(addForm: NgForm): void {
     
     document.getElementById('add-evenement-form').click();
-    this.evenementService.addEvenement(addForm.value).subscribe(
+    this.Evenementservice.addEvenement(addForm.value).subscribe(
       (response: Evenement) => {
         console.log(response);
         this.getEvenements();
@@ -63,7 +64,7 @@ export class GererEvenementComponent implements OnInit {
   }
 
   public onUpdateEvenement(evenement: Evenement): void {
-    this.evenementService.updateEvenement(evenement).subscribe(
+    this.Evenementservice.updateEvenement(evenement).subscribe(
       (response: Evenement) => {
         console.log(response);
         this.getEvenements();
@@ -76,7 +77,7 @@ export class GererEvenementComponent implements OnInit {
   }
 
   public onDeleteEvenement(evenementId: number): void {
-    this.evenementService.deleteEvenement(evenementId).subscribe(
+    this.Evenementservice.deleteEvenement(evenementId).subscribe(
       (response: void) => {
         console.log(response);
         this.getEvenements();
@@ -92,7 +93,8 @@ export class GererEvenementComponent implements OnInit {
     const results: Evenement[] = [];
     for (const evenement of this.evenements) {
       if (evenement.titre.toLowerCase().indexOf(key.toLowerCase()) !== -1
-      || evenement.message.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || evenement.details.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || evenement.date.toLowerCase().indexOf(key.toLowerCase()) !== -1
       ) {
         results.push(evenement);
       }
@@ -110,13 +112,16 @@ export class GererEvenementComponent implements OnInit {
     button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');
     if (mode === 'add') {
+      $("#addEvenementModal").prependTo("body");
       button.setAttribute('data-target', '#addEvenementModal');
     }
     if (mode === 'edit') {
+      $("#updateEvenementModal").prependTo("body");
       this.editEvenement = evenement;
       button.setAttribute('data-target', '#updateEvenementModal');
     }
     if (mode === 'delete') {
+      $("#deleteEvenementModal").prependTo("body");
       this.deleteEvenement = evenement;
       button.setAttribute('data-target', '#deleteEvenementModal');
     }

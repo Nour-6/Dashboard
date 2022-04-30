@@ -27,7 +27,7 @@ export class GererReclamationComponent implements OnInit {
     this.reclamationService.getReclamations().subscribe(
       (response: Reclamation[]) => {
         this.reclamations = response;
-        console.log(this.reclamations);
+     
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -98,14 +98,9 @@ export class GererReclamationComponent implements OnInit {
     button.type = 'button';
     button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');
-    if (mode === 'add') {
-      button.setAttribute('data-target', '#addReclamationModal');
-    }
-    if (mode === 'edit') {
-      this.editReclamation = reclamation;
-      button.setAttribute('data-target', '#updateReclamationModal');
-    }
+
     if (mode === 'delete') {
+      $("#deleteReclamationModal").prependTo("body");
       this.deleteReclamation = reclamation;
       button.setAttribute('data-target', '#deleteReclamationModal');
     }

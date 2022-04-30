@@ -1,34 +1,82 @@
-
-  <div class="container" id="main-container">
-  <div class="row">
-   <form  *ngIf="router.url === '/gerer-actualite'" class="form-inline my-2 my-lg-0">
-      <input type="search" (ngModelChange)="searchActualites(key4.value)" #key4="ngModel" ngModel
-       name="key4" id="searchName4" class="form-control mr-sm-2" placeholder="Search actualités..." required>
-    </form>
-    <div *ngFor="let actualite of actualites" class="col-md-6 col-xl-3">
-       <div class="card m-b-30">
-          <div class="card-body row">
-          
-             <div class="col-6 card-title align-self-center mb-0">
-                <h5>{{actualite?.titre}}</h5>
-               
-             </div>
-          </div>
-          <ul class="list-group list-group-flush">
-             <li class="list-group-item"><i class="fa fa-envelope float-right"></i>{{actualite?.message}}</li>
-            
-          </ul>
-          <div   class="card-body">
-             <div class="float-right btn-group btn-group-sm">
-                <a  *ngIf="showModeratorBoard  " (click)="onOpenModal(actualite, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
-                <a  *ngIf="showModeratorBoard  " (click)="onOpenModal(actualite, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
-             </div>
-          </div>
+<div class="row " id="main-container" >
+   <div class="col-md-12 m-b-35">
+      <h3 class="title-5 m-b-35">Actualités</h3>
+       <div class="overview-wrap m-b-10">   
+         <form  class="form-header" >
+            <input class="au-input au-input--xl" type="search" (ngModelChange)="searchActualites(key4.value)" #key4="ngModel" ngModel
+            name="key4" id="searchName4" placeholder="Rechercher des actualités..." required/>
+            <button class="au-btn--submit" type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </form>
+           <button class="au-btn au-btn-icon au-btn--blue" *ngIf="showModeratorBoard" (click)="onOpenModal(null, 'add')">
+            <i class="fa-solid fa-plus"></i> Ajouter Actualité
+           </button>
        </div>
-    </div>
-  </div>
+   </div>
+
+
   
-  
+
+   <div *ngFor="let actualite of actualites"  class=" container col-sm-6 col-lg-4 ">
+      <div class="card">
+        <div class="card-header">
+          <img src={{actualite?.imageUrl}} alt="rover" />
+        </div>
+        <div class="card-body">
+          <span class="tag tag-teal">{{actualite?.date}}</span>
+          <h4>
+            {{actualite?.titre}}
+          </h4>
+          <p>
+            {{actualite?.details}}
+          </p>
+            <div class="float-right btn-group btn-group-sm">
+               <a  *ngIf="showModeratorBoard  " (click)="onOpenModal(actualite, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+               <a  *ngIf="showModeratorBoard  " (click)="onOpenModal(actualite, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+   </div>
+   <!-- Add Actualite Modal -->
+   <div class="modal fade" id="addActualiteModal" tabindex="-1" role="dialog" aria-labelledby="addActualiteModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+           <div class="modal-header">
+              <h5 class="modal-title" id="addActualiteModalLabel">Add Actualite</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+           </div>
+           <div class="modal-body">
+              <form #addForm2="ngForm"  (ngSubmit)="onAddActualite(addForm2)">
+              <div class="form-group">
+                 <label for="titre">Titre</label>
+                 <input type="text" ngModel name="titre" class="form-control" id="titre" placeholder="titre" required>
+              </div>
+              <div class="form-group">
+                 <label for="details">Details </label>
+                 <input type="text" ngModel name="details" class="form-control" id="details" placeholder="details" required>
+              </div>
+              <div class="form-group">
+               <label for="details">Date</label>
+               <input type="text" ngModel name="date" class="form-control" id="date" placeholder="date" required>
+            </div>
+            <div class="form-group">
+               <label for="details">ImageUrl </label>
+               <input type="text"  ngModel name="ImageUrl" class="form-control" id="ImageUrl" placeholder="ImageUrl" required>
+            </div>
+          
+              <div class="modal-footer">
+                 <button type="button" id="add-actualite-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                 <button [disabled]="addForm2.invalid"  type="submit" class="btn btn-primary" >Save changes</button>
+              </div>
+              </form>
+           </div>
+        </div>
+      </div>
+      </div>
   
   <!-- Edit Modal -->
   <div class="modal fade" id="updateActualiteModal" tabindex="-1" role="dialog" aria-labelledby="actualiteEditModalLabel" aria-hidden="true">
@@ -49,9 +97,17 @@
                 <input type="hidden" ngModel="{{editActualite?.id}}" name="id" class="form-control" id="id" placeholder="Email">
                
                 <div class="form-group">
-                   <label for="message">message Address</label>
-                   <input type="text" ngModel="{{editActualite?.message}}" name="message" class="form-control" id="message" placeholder="message">
+                   <label for="message">Details</label>
+                   <input type="text" ngModel="{{editActualite?.details}}" name="details" class="form-control" id="details" placeholder="Details">
                 </div>
+                <div class="form-group">
+                  <label for="message">Image</label>
+                  <input type="text" ngModel="{{editActualite?.imageUrl}}" name="imageUrl" class="form-control" id="imageUrl" placeholder="ImageUrl">
+               </div>
+               <div class="form-group">
+                  <label for="message">Date</label>
+                  <input type="text" ngModel="{{editActualite?.date}}" name="date" class="form-control" id="date" placeholder="Date">
+               </div>
             
               
                 <div class="modal-footer">
@@ -84,7 +140,7 @@
        </div>
     </div>
   </div>
-  </div>
+  
   
   <!-- Notification for no actualites -->
   <div *ngIf="actualites?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
@@ -93,4 +149,3 @@
     <p>No Actualites were found.</p>
   </div>
   </div>
-  

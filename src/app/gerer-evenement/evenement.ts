@@ -1,7 +1,9 @@
 export interface Evenement {
     id: number;
     titre: string;
-    message: string;
+    details: string;
+    date:string;
+    imageUrl:string;
  
   }
   

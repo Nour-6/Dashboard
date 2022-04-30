@@ -126,7 +126,7 @@ section {
 }
 .page-container {
     background: #e5e5e5;
-    padding-left: 300px;
+    padding-left: 250px;
 }
 
 @media (max-width: 991px) {
@@ -135,22 +135,6 @@ section {
         top: 88px;
         padding-left: 0;
     }
-}
-
-.page-container2 {
-    background: #f2f2f2;
-    padding-left: 300px;
-}
-
-@media (max-width: 991px) {
-    .page-container2 {
-        position: relative;
-        padding-left: 0;
-    }
-}
-
-.page-container3 {
-    background: #f7f7f7;
 }
 
 .main-content {

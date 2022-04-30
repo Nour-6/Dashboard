@@ -93,7 +93,8 @@ export class GererActualiteComponent implements OnInit {
     const results: Actualite[] = [];
     for (const actualite of this.actualites) {
       if (actualite.titre.toLowerCase().indexOf(key.toLowerCase()) !== -1
-      || actualite.message.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || actualite.details.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || actualite.date.toLowerCase().indexOf(key.toLowerCase()) !== -1
       ) {
         results.push(actualite);
       }
@@ -111,13 +112,16 @@ export class GererActualiteComponent implements OnInit {
     button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');
     if (mode === 'add') {
+      $("#addActualiteModal").prependTo("body");
       button.setAttribute('data-target', '#addActualiteModal');
     }
     if (mode === 'edit') {
+      $("#updateActualiteModal").prependTo("body");
       this.editActualite = actualite;
       button.setAttribute('data-target', '#updateActualiteModal');
     }
     if (mode === 'delete') {
+      $("#deleteActualiteModal").prependTo("body");
       this.deleteActualite = actualite;
       button.setAttribute('data-target', '#deleteActualiteModal');
     }

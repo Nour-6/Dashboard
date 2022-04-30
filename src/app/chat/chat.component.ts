@@ -10,11 +10,12 @@ import { TokenStorageService } from '../_services/token-storage.service';
 })
 export class ChatComponent implements OnInit, OnDestroy {
 use: string;
+
   constructor(public webSocketService: WebSocketService,private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     this.use = this.tokenStorage.getUser().username;
-   
+  
     console.log(name);
     
     this.webSocketService.openWebSocket();
@@ -25,6 +26,7 @@ use: string;
   }
 
   sendMessage(sendForm: NgForm) {
+   
     const chatMessageDto = new ChatMessageDto(this.use, sendForm.value.message);
     this.webSocketService.sendMessage(chatMessageDto);
     sendForm.controls.message.reset();

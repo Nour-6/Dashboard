@@ -3,7 +3,7 @@
 
 
 .menu-sidebar {
-    width: 300px;
+    width: 250px;
     position: fixed;
     left: 0;
     top: 0;
@@ -13,9 +13,9 @@
 }
 
 .menu-sidebar .logo {
-    background: #f5f5f5;
-    height: 70px;
-    padding: 0 50px;
+    background: #ffff;
+    height: 90px;
+    padding: 0 30px;
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -26,26 +26,13 @@
     -moz-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
-    border-right: 1px solid #e5e5e5;
-    position: relative;
-    z-index: 3;
+ 
 }
 .menu-sidebar .logo img{
     max-width: 180px;
     justify-content: center;
 }
 
-.menu-sidebar .navbar__list .navbar__sub-list {
-    display: none;
-    padding-left: 34px;
-}
-
-.menu-sidebar .navbar__list .navbar__sub-list li a {
-    padding: 11.5px 0;
-}
 
 .menu-sidebar__content {
     position: relative;
@@ -55,28 +42,41 @@
 }
 
 .navbar-sidebar {
-    padding: 35px;
+    padding:  30px 0 ;
     padding-bottom: 0;
 }
+
 
 .navbar-sidebar .navbar__list li a {
     display: block;
     color: #555;
     font-size: 16px;
     padding: 15px 0;
-}
-
+    position: relative;
+    z-index: 1;
+    transition: .35s ease color;
+} 
+.navbar-sidebar .navbar__list li a:before{
+    content: '';
+    display: block;
+    z-index: -1;
+    position: absolute;
+    left: -120%; top: 0;
+    width: 100%; height: 100%;
+    border-right: solid 5px #4272d7;
+    background:#e5e5e5;
+    transition: .35s ease left;
+  }
+  .navbar-sidebar .navbar__list li a.is-current:before,
+  .navbar-sidebar .navbar__list li a:hover:before,
+  .navbar-sidebar .navbar__list li a:focus:before{
+      left: 0;
+  }
 .navbar-sidebar .navbar__list li a i {
-    margin-right: 19px;
+    padding-right: 19px;
+    padding-left: 19px ;
 }
 
-.navbar-sidebar .navbar__list li a:hover {
-    color: #4272d7;
-}
-
-.navbar-sidebar .navbar__list li.active > a {
-    color: #4272d7;
-}
 
 .has-sub {
     position: relative;
@@ -354,14 +354,3 @@ a {
     -moz-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
-.navbar__list li a:hover{
-background-color: #e5e5e5;
-}
-.navbar__list li:active:before {
-    content: '';
-    position: absolute;
-    right: 0;
-    background-color: #2869ff;
-    height: 100%;
-    width: 4px;
-  }

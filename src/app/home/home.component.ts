@@ -215,7 +215,7 @@ export class HomeComponent implements OnInit {
     const results: Actualite[] = [];
     for (const actualite of this.actualites) {
       if (actualite.titre.toLowerCase().indexOf(key.toLowerCase()) !== -1
-      || actualite.message.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || actualite.details.toLowerCase().indexOf(key.toLowerCase()) !== -1
       ) {
         results.push(actualite);
       }
@@ -232,7 +232,7 @@ export class HomeComponent implements OnInit {
     const results: Evenement[] = [];
     for (const evenement of this.evenements) {
       if (evenement.titre.toLowerCase().indexOf(key.toLowerCase()) !== -1
-      || evenement.message.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || evenement.details.toLowerCase().indexOf(key.toLowerCase()) !== -1
       ) {
         results.push(evenement);
       }

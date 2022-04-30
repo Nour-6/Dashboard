@@ -1,65 +1,82 @@
-
-  <div class="container" id="main-container">
-  <div class="row">
-
-   <form  *ngIf="router.url === '/gerer-evenement'" class="form-inline my-2 my-lg-0">
-     <input type="search" (ngModelChange)="searchEvenements(key5.value)" #key5="ngModel" ngModel
-      name="key5" id="searchName5" class="form-control mr-sm-2" placeholder="Search événements..." required>
-   </form>
-     
-    <div *ngFor="let evenement of evenements" class="col-md-6 col-xl-3">
-       <div class="card m-b-30">
-          <div class="card-body row">
-          
-             <div class="col-6 card-title align-self-center mb-0">
-                <h5>{{evenement?.titre}}</h5>
-               
-             </div>
-          </div>
-          <ul class="list-group list-group-flush">
-             <li class="list-group-item"><i class="fa fa-envelope float-right"></i>{{evenement?.message}}</li>
-            
-          </ul>
-          <div   class="card-body">
-             <div class="float-right btn-group btn-group-sm">
-                <a  *ngIf="showModeratorBoard  " (click)="onOpenModal(evenement, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
-                <a  *ngIf="showModeratorBoard  " (click)="onOpenModal(evenement, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
-             </div>
-          </div>
-       </div>
-    </div>
-  </div>
-  
-  <!-- Add Evenement Modal -->
-  <div class="modal fade" id="addEvenementModal" tabindex="-1" role="dialog" aria-labelledby="addEvenementModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-         <div class="modal-header">
-            <h5 class="modal-title" id="addEvenementModalLabel">Add Evenement</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+<div class="row " id="main-container" >
+   <div class="col-md-12 m-b-35">
+      <h3 class="title-5 m-b-35">Actualités</h3>
+       <div class="overview-wrap m-b-10">   
+         <form  class="form-header" >
+            <input class="au-input au-input--xl" type="search" (ngModelChange)="searchEvenements(key4.value)" #key4="ngModel" ngModel
+            name="key4" id="searchName4" placeholder="Rechercher des actualités..." required/>
+            <button class="au-btn--submit" type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>
             </button>
-         </div>
-         <div class="modal-body">
-            <form #addForm="ngForm" (ngSubmit)="onAddEvenement(addForm)">
-            <div class="form-group">
-               <label for="titre">>Titre</label>
-               <input type="text" ngModel name="titre" class="form-control" id="titre" placeholder="titre" required>
+        </form>
+           <button class="au-btn au-btn-icon au-btn--blue" *ngIf="showModeratorBoard" (click)="onOpenModal(null, 'add')">
+            <i class="fa-solid fa-plus"></i> Ajouter Actualité
+           </button>
+       </div>
+   </div>
+
+
+  
+
+   <div *ngFor="let evenement of evenements"  class=" container col-sm-6 col-lg-4 ">
+      <div class="card">
+        <div class="card-header">
+          <img src={{evenement?.imageUrl}} alt="rover" />
+        </div>
+        <div class="card-body">
+          <span class="tag tag-teal">{{evenement?.date}}</span>
+          <h4>
+            {{evenement?.titre}}
+          </h4>
+          <p>
+            {{evenement?.details}}
+          </p>
+            <div class="float-right btn-group btn-group-sm">
+               <a  *ngIf="showModeratorBoard  " (click)="onOpenModal(evenement, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+               <a  *ngIf="showModeratorBoard  " (click)="onOpenModal(evenement, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
             </div>
-            <div class="form-group">
-               <label for="message">message </label>
-               <input type="text" ngModel name="message" class="form-control" id="message" placeholder="message" required>
-            </div>
-        
-            <div class="modal-footer">
-               <button type="button" id="add-evenement-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
-               <button type="submit" class="btn btn-primary" >Save changes</button>
-            </div>
-            </form>
-         </div>
+          </div>
+        </div>
       </div>
-    </div>
-    </div>
+   </div>
+   <!-- Add Evenement Modal -->
+   <div class="modal fade" id="addEvenementModal" tabindex="-1" role="dialog" aria-labelledby="addEvenementModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+           <div class="modal-header">
+              <h5 class="modal-title" id="addEvenementModalLabel">Add Evenement</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+           </div>
+           <div class="modal-body">
+              <form #addForm2="ngForm"  (ngSubmit)="onAddEvenement(addForm2)">
+              <div class="form-group">
+                 <label for="titre">Titre</label>
+                 <input type="text" ngModel name="titre" class="form-control" id="titre" placeholder="titre" required>
+              </div>
+              <div class="form-group">
+                 <label for="details">Details </label>
+                 <input type="text" ngModel name="details" class="form-control" id="details" placeholder="details" required>
+              </div>
+              <div class="form-group">
+               <label for="details">Date</label>
+               <input type="text" ngModel name="date" class="form-control" id="date" placeholder="date" required>
+            </div>
+            <div class="form-group">
+               <label for="details">ImageUrl </label>
+               <input type="text"  ngModel name="ImageUrl" class="form-control" id="ImageUrl" placeholder="ImageUrl" required>
+            </div>
+          
+              <div class="modal-footer">
+                 <button type="button" id="add-evenement-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                 <button [disabled]="addForm2.invalid"  type="submit" class="btn btn-primary" >Save changes</button>
+              </div>
+              </form>
+           </div>
+        </div>
+      </div>
+      </div>
   
   <!-- Edit Modal -->
   <div class="modal fade" id="updateEvenementModal" tabindex="-1" role="dialog" aria-labelledby="evenementEditModalLabel" aria-hidden="true">
@@ -80,9 +97,17 @@
                 <input type="hidden" ngModel="{{editEvenement?.id}}" name="id" class="form-control" id="id" placeholder="Email">
                
                 <div class="form-group">
-                   <label for="message">message Address</label>
-                   <input type="text" ngModel="{{editEvenement?.message}}" name="message" class="form-control" id="message" placeholder="message">
+                   <label for="message">Details</label>
+                   <input type="text" ngModel="{{editEvenement?.details}}" name="details" class="form-control" id="details" placeholder="Details">
                 </div>
+                <div class="form-group">
+                  <label for="message">Image</label>
+                  <input type="text" ngModel="{{editEvenement?.imageUrl}}" name="imageUrl" class="form-control" id="imageUrl" placeholder="ImageUrl">
+               </div>
+               <div class="form-group">
+                  <label for="message">Date</label>
+                  <input type="text" ngModel="{{editEvenement?.date}}" name="date" class="form-control" id="date" placeholder="Date">
+               </div>
             
               
                 <div class="modal-footer">
@@ -115,13 +140,12 @@
        </div>
     </div>
   </div>
-  </div>
+  
   
   <!-- Notification for no evenements -->
   <div *ngIf="evenements?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
   <div class="alert alert-info" role="alert">
-    <h4 class="alert-heading">NO Evenements!</h4>
+    <h4 class="alert-heading">NO Actualités!</h4>
     <p>No Evenements were found.</p>
   </div>
   </div>
-  

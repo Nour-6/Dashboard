@@ -1,59 +1,22 @@
+ <div class="row" id="main-container">
+               <div class="col-md-12">
+                  <h3 class="title-5 m-b-35">Liste des employés</h3>
+                   <div class="overview-wrap m-b-10">   
+                     <form class="form-header" >
+                        <input class="au-input au-input--xl" type="text" name="search" placeholder="Rechercher des employés..." />
+                        <button class="au-btn--submit" type="submit">
+                          <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+                       <button class="au-btn au-btn-icon au-btn--blue" *ngIf="showAdminBoard" (click)="onOpenModal(null, 'add')">
+                        <i class="fa-solid fa-plus"></i> Ajouter Employé
+                       </button>
+                   </div>
+               </div>
 
-<div class="container" id="main-container">
-   <div class="row">
-    <nav  class="navbar navbar-expand-lg "  >
-       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-         <span class="navbar-toggler-icon"></span>
-       </button>
-       <div class="overview-wrap">
-     <form class="form-header"  action="" method="POST">
-       <input class="au-input au-input--xl" type="search"  placeholder="Search reclamations..." />
-       <button class="au-btn--submit" type="submit">
-        <i class="fa-solid fa-magnifying-glass"></i>
-       </button>
-   </form>
-   <button class="au-btn au-btn-icon au-btn--blue">
-      <i class="fa-solid fa-plus"></i>  add item</button>
-   </div>
-    </nav>
-   
-           
-                <!-- DATA TABLE -->
-                <h3 class="title-5 m-b-35">data table</h3>
-                <div class="table-data__tool">
-                    <div class="table-data__tool-left">
-                        <div class="rs-select2--light rs-select2--md">
-                            <select class="js-select2" name="property">
-                                <option selected="selected">All Properties</option>
-                                <option value="">Option 1</option>
-                                <option value="">Option 2</option>
-                            </select>
-                            <div class="dropDownSelect2"></div>
-                        </div>
-                        <div class="rs-select2--light rs-select2--sm">
-                            <select class="js-select2" name="time">
-                                <option selected="selected">Today</option>
-                                <option value="">3 Days</option>
-                                <option value="">1 Week</option>
-                            </select>
-                            <div class="dropDownSelect2"></div>
-                        </div>
-                        <button class="au-btn-filter">
-                            <i class="zmdi zmdi-filter-list"></i>filters</button>
-                    </div>
-                    <div class="table-data__tool-right">
-                        <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                            <i class="zmdi zmdi-plus"></i>add item</button>
-                        <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
-                            <select class="js-select2" name="type">
-                                <option selected="selected">Export</option>
-                                <option value="">Option 1</option>
-                                <option value="">Option 2</option>
-                            </select>
-                            <div class="dropDownSelect2"></div>
-                        </div>
-                    </div>
-                </div>
+          
+                <!-- DATA TABLE -->  
+                
                 <div class="table-responsive table-responsive-data2">
                     <table class="table table-data2">
                         <thead>
@@ -64,16 +27,15 @@
                                         <span class="au-checkmark"></span>
                                     </label>
                                 </th>
-                                <th>name</th>
-                                <th>email</th>
-                                <th>description</th>
-                                <th>date</th>
-                                <th>status</th>
-                                <th>price</th>
+                                <th>Photo</th>
+                                <th>Nom</th>
+                                <th>Role</th>
+                                <th>Email</th>
+                                
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody *ngFor="let employee of employees">
                             <tr class="tr-shadow">
                                 <td>
                                     <label class="au-checkbox">
@@ -81,174 +43,106 @@
                                         <span class="au-checkmark"></span>
                                     </label>
                                 </td>
-                                <td>Lori Lynch</td>
                                 <td>
-                                    <span class="block-email">lori@example.com</span>
-                                </td>
-                                <td class="desc">Samsung S8 Black</td>
-                                <td>2018-09-27 02:12</td>
+                                   <img src="{{employee?.imageUrl}}" alt=""class="img-fluid rounded-circle w-35" />
+                                 </td>
                                 <td>
-                                    <span class="status--process">Processed</span>
+                                   {{employee?.username}}
+                                </td>   
+                                <td *ngIf="employee?.roles[0].name=='ROLE_USER'"><span  class="role user">{{employee?.roles[0].name}}</span>
                                 </td>
-                                <td>$679.00</td>
+                                <td *ngIf="employee?.roles[0].name=='ROLE_ADMIN'"><span  class="role admin">{{employee?.roles[0].name}}</span>
+                              </td>
+                              <td *ngIf="employee?.roles[0].name=='ROLE_MODERATOR'"><span  class="role member">{{employee?.roles[0].name}}</span>
+                              </td>
                                 <td>
-                                    <div class="table-data-feature">
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
-                                            <i class="zmdi zmdi-mail-send"></i>
-                                        </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                                            <i class="zmdi zmdi-edit"></i>
-                                        </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                            <i class="zmdi zmdi-delete"></i>
-                                        </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="More">
-                                            <i class="zmdi zmdi-more"></i>
-                                        </button>
-                                    </div>
-                                </td>
+                                 <span class="block-email">{{employee?.email}}</span>
+                              </td>
+                             <td class="user-icons">
+                              <a  class="table-link" data-toggle="tooltip"  title="Detail" *ngIf="showAdminBoard"    (click)="onOpenModal(employee, 'add')"  data-placement="top">
+                                 <span class="fa-stack">
+                                    <i class="fa fa-square fa-stack-2x"></i>
+                                    <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                 </span>
+                              </a>
+                              <a  class="table-link">
+                                 <span class="fa-stack" data-toggle="tooltip"  title="Edit" *ngIf="showAdminBoard"    (click)="onOpenModal(employee, 'edit')"  data-placement="top">
+                                    <i class="fa fa-square fa-stack-2x"></i>
+                                    <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                 </span>
+                              </a>
+                              <a  class="table-link danger" data-toggle="tooltip"  title="Delete" *ngIf="showAdminBoard"    (click)="onOpenModal(employee, 'delete')"  data-placement="top">
+                                 <span class="fa-stack">
+                                    <i class="fa fa-square fa-stack-2x"></i>
+                                    <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                 </span>
+                              </a>
+                           </td>
+                               
                             </tr>
                             <tr class="spacer"></tr>
-                            <tr class="tr-shadow">
-                                <td>
-                                    <label class="au-checkbox">
-                                        <input type="checkbox">
-                                        <span class="au-checkmark"></span>
-                                    </label>
-                                </td>
-                                <td>Lori Lynch</td>
-                                <td>
-                                    <span class="block-email">john@example.com</span>
-                                </td>
-                                <td class="desc">iPhone X 64Gb Grey</td>
-                                <td>2018-09-29 05:57</td>
-                                <td>
-                                    <span class="status--process">Processed</span>
-                                </td>
-                                <td>$999.00</td>
-                                <td>
-                                    <div class="table-data-feature">
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
-                                            <i class="zmdi zmdi-mail-send"></i>
-                                        </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                                            <i class="zmdi zmdi-edit"></i>
-                                        </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                            <i class="zmdi zmdi-delete"></i>
-                                        </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="More">
-                                            <i class="zmdi zmdi-more"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="spacer"></tr>
-                            <tr class="tr-shadow">
-                                <td>
-                                    <label class="au-checkbox">
-                                        <input type="checkbox">
-                                        <span class="au-checkmark"></span>
-                                    </label>
-                                </td>
-                                <td>Lori Lynch</td>
-                                <td>
-                                    <span class="block-email">lyn@example.com</span>
-                                </td>
-                                <td class="desc">iPhone X 256Gb Black</td>
-                                <td>2018-09-25 19:03</td>
-                                <td>
-                                    <span class="status--denied">Denied</span>
-                                </td>
-                                <td>$1199.00</td>
-                                <td>
-                                    <div class="table-data-feature">
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
-                                            <i class="zmdi zmdi-mail-send"></i>
-                                        </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                                            <i class="zmdi zmdi-edit"></i>
-                                        </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                            <i class="zmdi zmdi-delete"></i>
-                                        </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="More">
-                                            <i class="zmdi zmdi-more"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="spacer"></tr>
-                            <tr class="tr-shadow">
-                                <td>
-                                    <label class="au-checkbox">
-                                        <input type="checkbox">
-                                        <span class="au-checkmark"></span>
-                                    </label>
-                                </td>
-                                <td>Lori Lynch</td>
-                                <td>
-                                    <span class="block-email">doe@example.com</span>
-                                </td>
-                                <td class="desc">Camera C430W 4k</td>
-                                <td>2018-09-24 19:10</td>
-                                <td>
-                                    <span class="status--process">Processed</span>
-                                </td>
-                                <td>$699.00</td>
-                                <td>
-                                    <div class="table-data-feature">
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
-                                            <i class="zmdi zmdi-mail-send"></i>
-                                        </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                                            <i class="zmdi zmdi-edit"></i>
-                                        </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                            <i class="zmdi zmdi-delete"></i>
-                                        </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="More">
-                                            <i class="zmdi zmdi-more"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+                            
                         </tbody>
                     </table>
+             
                 </div>
-              
-                <!-- END DATA TABLE -->
-      <div *ngFor="let employee of employees" class="col-md-6 col-xl-3">
-         <div class="card m-b-30">
-            <div class="card-body row">
-            <div class="col-6">
-                <a href=""><img src="{{employee?.imageUrl}}" alt="" class="img-fluid rounded-circle w-60"></a>
-             </div>
-               <div class="col-6 card-title align-self-center mb-0">
-                  <h5>{{employee?.username}}</h5>
-                 
-               </div>
-            </div>
-            <ul class="list-group list-group-flush">
-               <li class="list-group-item"><i class="fa fa-envelope float-right"></i>{{employee?.email}}</li>
-               <li class="list-group-item"><i class="fa fa-envelope float-right"></i>{{employee?.roles[0].name}}</li>
-            </ul>
-            <div   class="card-body">
-               <div class="float-right btn-group btn-group-sm">
-                  <a  *ngIf="showAdminBoard   && employee?.roles[0]?.name!='ROLE_ADMIN' && employee?.roles[0]?.name!='ROLE_MODERATOR'  " (click)="onOpenModal(employee, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
-                  <a  *ngIf="showAdminBoard   && employee?.roles[0]?.name!='ROLE_ADMIN' && employee?.roles[0]?.name!='ROLE_MODERATOR'  " (click)="onOpenModal(employee, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
-               </div>
-            </div>
-         </div>
-     
-    </div>
+          <!-- END DATA TABLE -->
+                <div class="text-center mt-5 mt-sm-5">
+                  <ul class="pagination justify-content-center mb-0">
+                    <li class="page-item disabled"> <span class="page-link">Prev</span> </li>
+                    <li class="page-item active" aria-current="page"><span class="page-link">1 </span> <span class="sr-only">(current)</span></li>
+                    <li class="page-item"><a class="page-link" >2</a></li>
+                    <li class="page-item"><a class="page-link" >3</a></li>
+                    <li class="page-item"><a class="page-link" >...</a></li>
+                    <li class="page-item"><a class="page-link" >25</a></li>
+                    <li class="page-item"> <a class="page-link" >Next</a> </li>
+                  </ul>
+                </div>
+                
+      
     
-   </div>
+  
 
-</div>
-    
+    <!-- Add Employee Modal -->
+  <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="addEmployeeModalLabel">Add Employee</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <form #addForm="ngForm" (ngSubmit)="onAddEmloyee(addForm)">
+           <div class="form-group">
+              <label for="username">Name</label>
+              <input type="text" ngModel name="username" class="form-control" id="username" placeholder="Username" required>
+           </div>
+           <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" ngModel name="email" class="form-control" id="email" placeholder="Email" required>
+           </div>
+           <div class="form-group">
+             <label for="password">Password</label>
+             <input  type="pasword" ngModel name="password" class="form-control" id="password" placeholder="Password"  minlength="6" required/>
+          </div>
+         <div class="form-group">
+             <label for="imageUrl">Image URL</label>
+             <input type="img" ngModel name="imageUrl" class="form-control" id="imageUrl" placeholder="Image URL" required>
+          </div>
+       
+           <div class="modal-footer">
+              <button type="button" id="add-employee-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>
+           </div>
+           </form>
+        </div>
+     </div>
+   </div>
+   </div>
     <!-- Edit Modal -->
-    <div class="modal fade" id="updateEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="employeeEditModalLabel" aria-hidden="true">
+    <div class="modal fade"  id="updateEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="employeeEditModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
          <div class="modal-content">
             <div class="modal-header">
@@ -319,4 +213,4 @@
       <p>No Employees were found.</p>
     </div>
     </div>
- 
+ </div>

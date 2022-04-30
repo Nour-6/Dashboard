@@ -1,15 +1,26 @@
-<div class="wrapper fadeInDown">
-  <div id="formContent">
-    <div class="alert alert-warning" *ngIf='isLoginFailed'>{{errorMessage}}</div>
-    <div class="alert alert-success" *ngIf='isLoggedIn'>{{successMessage}}</div>
-    <!-- Tabs Titles -->
-    <h3>Login</h3>
-    <!-- Login Form -->
-    <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-      <input type="text" id="username" class="fadeIn second" [(ngModel)]="form.username" name="username" placeholder="username">
-      <input type="password" id="password" class="fadeIn third"  [(ngModel)]="form.password" name="password" placeholder="password">
-      <input type="submit" (click)=onSubmit() class="fadeIn fourth" value="Log In">
-    </form>
 
+<div class="modal is-open">
+  <div class="modal-container">
+    <div class="modal-left">
+      <form  *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
+      <h1 class="modal-title">Bienvenue!</h1>
+      <p class="modal-desc">Veuillez vous connecter.</p>
+      <div class="input-block">
+        <label for="username" class="input-label">Username</label>
+        <input  [(ngModel)]="form.username" name="username" type="text" placeholder="Email or Phone" id="username">
+      </div>
+      <div class="input-block">
+        <label for="password" class="input-label">Password</label>
+        <input  [(ngModel)]="form.password" name="password" type="password" placeholder="Password" id="password">
+      </div>
+      <div class="modal-buttons">
+        <button class="input-button" (click)=onSubmit()>Connexion</button>
+      </div>
+    </form>
+    </div>
+    <div class="modal-right">
+      <img src="https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=dfd2ec5a01006fd8c4d7592a381d3776&auto=format&fit=crop&w=1000&q=80" alt="">
+    </div>
   </div>
+  
 </div>

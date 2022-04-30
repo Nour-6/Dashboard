@@ -3,7 +3,7 @@
        <div class="section__content section__content--p30">
            <div class="container-fluid">
                <div class="header-wrap justify-content-end ">
-                   <div class="header-button ">
+                   <div class="header-button">
                        <div class="noti-wrap">
                            <div class="noti__item js-item-menu">
                               <i class="fa-solid fa-comment-dots"></i>
@@ -123,9 +123,9 @@
                                  {{ username }}
                               </a>
                               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a *ngIf="isLoggedIn" class="dropdown-item" href="/profile">Mon Profil</a>
+                                <a *ngIf="isLoggedIn" class="dropdown-item" href="/profile"><i class="fa-solid fa-user"></i>  Mon Profil</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" *ngIf="isLoggedIn" href="#" (click)="logout()">Se déconnecter</a>
+                                <a class="dropdown-item" *ngIf="isLoggedIn" href="#" (click)="logout()"><i class="fa-solid fa-power-off"></i> Se déconnecter</a>
                               </div>
                                  
                                   
@@ -137,148 +137,7 @@
 
                 </div>
             </div>
-   </header> 
- <nav *ngIf="isLoggedIn" class="navbar navbar-expand-lg navbar-light bg-light" style="margin-left: 150px;" >
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-
-
-
-    
-
- 
-
-
-
-
-<div *ngIf="router.url === '/user'" class="collapse navbar-collapse" id="navbarColor02">
-  <ul   class="navbar-nav mr-auto">
-     <li class="nav-item active">
-        <a *ngIf="showAdminBoard" class="nav-link" (click)="onOpenModalEmployee(null, 'add')">Add Employee <span class="sr-only">(current)</span></a>
-     </li>
-  </ul>
-  </div>
-  <div *ngIf="router.url === '/gerer-actualite'" class="collapse navbar-collapse" id="navbarColor02">
-    <ul   class="navbar-nav mr-auto">
-       <li class="nav-item active">
-          <a *ngIf="showModeratorBoard" class="nav-link" (click)="onOpenModalActualite(null, 'add')">Add Actualité <span class="sr-only">(current)</span></a>
-       </li>
-    </ul>
-    </div>
-    <div *ngIf="router.url === '/gerer-evenement'" class="collapse navbar-collapse" id="navbarColor02">
-      <ul   class="navbar-nav mr-auto">
-         <li class="nav-item active">
-            <a *ngIf="showModeratorBoard" class="nav-link" (click)="onOpenModalEvenement(null, 'add')">Add Evénement <span class="sr-only">(current)</span></a>
-         </li>
-      </ul>
-      </div>
-
-
-  </nav>
- 
-  <!-- Add Employee Modal -->
-  <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-         <div class="modal-header">
-            <h5 class="modal-title" id="addEmployeeModalLabel">Add Employee</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-         </div>
-         <div class="modal-body">
-            <form #addForm="ngForm" (ngSubmit)="onAddEmloyee(addForm)">
-            <div class="form-group">
-               <label for="username">Name</label>
-               <input type="text" ngModel name="username" class="form-control" id="username" placeholder="Username" required>
-            </div>
-            <div class="form-group">
-               <label for="email">Email Address</label>
-               <input type="email" ngModel name="email" class="form-control" id="email" placeholder="Email" required>
-            </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input  type="pasword" ngModel name="password" class="form-control" id="password" placeholder="Password"  minlength="6" required/>
-           </div>
-          <div class="form-group">
-              <label for="imageUrl">Image URL</label>
-              <input type="img" ngModel name="imageUrl" class="form-control" id="imageUrl" placeholder="Image URL" required>
-           </div>
-        
-            <div class="modal-footer">
-               <button type="button" id="add-employee-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
-               <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>
-            </div>
-            </form>
-         </div>
-      </div>
-    </div>
-    </div>
-      <!-- Add Actualite Modal -->
-  <div class="modal fade" id="addActualiteModal" tabindex="-1" role="dialog" aria-labelledby="addActualiteModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-         <div class="modal-header">
-            <h5 class="modal-title" id="addActualiteModalLabel">Add Actualite</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-         </div>
-         <div class="modal-body">
-            <form #addForm2="ngForm" (ngSubmit)="onAddActualite(addForm2)">
-            <div class="form-group">
-               <label for="titre">>Titre</label>
-               <input type="text" ngModel name="titre" class="form-control" id="titre" placeholder="titre" required>
-            </div>
-            <div class="form-group">
-               <label for="message">message </label>
-               <input type="text" ngModel name="message" class="form-control" id="message" placeholder="message" required>
-            </div>
-        
-            <div class="modal-footer">
-               <button type="button" id="add-actualite-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
-               <button [disabled]="addForm2.invalid"  type="submit" class="btn btn-primary" >Save changes</button>
-            </div>
-            </form>
-         </div>
-      </div>
-    </div>
-    </div>
-    <!-- Add Evenement Modal -->
-  <div class="modal fade" id="addEvenementModal" tabindex="-1" role="dialog" aria-labelledby="addEvenementModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-         <div class="modal-header">
-            <h5 class="modal-title" id="addEvenementModalLabel">Add Evenement</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-         </div>
-         <div class="modal-body">
-            <form #addForm3="ngForm" (ngSubmit)="onAddEvenement(addForm3)">
-            <div class="form-group">
-               <label for="titre">>Titre</label>
-               <input type="text" ngModel name="titre" class="form-control" id="titre" placeholder="titre" required>
-            </div>
-            <div class="form-group">
-               <label for="message">message </label>
-               <input type="text" ngModel name="message" class="form-control" id="message" placeholder="message" required>
-            </div>
-        
-            <div class="modal-footer">
-               <button type="button" id="add-evenement-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
-               <button [disabled]="addForm3.invalid" type="submit" class="btn btn-primary" >Save changes</button>
-            </div>
-            </form>
-         </div>
-      </div>
-    </div>
-    </div>
-
-
-            
+   </header>         
   
    <!-- HEADER DESKTOP-->
 

@@ -16,7 +16,7 @@ import { GererReclamationComponent } from './gerer-reclamation/gerer-reclamation
 import { GererActualiteComponent } from './gerer-actualite/gerer-actualite.component';
 import { GererEvenementComponent } from './gerer-evenement/gerer-evenement.component';
 import { UserListComponent } from './user-list/user-list.component';
-
+import { GererOffreComponent } from './gerer-offre/gerer-offre.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -35,7 +35,8 @@ const routes: Routes = [
   { path: 'postuler-reclamation', component: PostulerReclamationComponent },
   { path: 'gerer-reclamation', component: GererReclamationComponent },
   { path: 'gerer-actualite', component: GererActualiteComponent },
-  { path: 'gerer-evenement', component: GererEvenementComponent }
+  { path: 'gerer-evenement', component: GererEvenementComponent },
+  { path: 'gerer-offre', component: GererOffreComponent }
 ];
 
 @NgModule({

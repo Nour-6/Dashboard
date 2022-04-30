@@ -26,6 +26,7 @@ import { PostulerReclamationComponent } from './postuler-reclamation/postuler-re
 import { GererActualiteComponent } from './gerer-actualite/gerer-actualite.component';
 import { GererEvenementComponent } from './gerer-evenement/gerer-evenement.component';
 import { UserListComponent } from './user-list/user-list.component';
+import { GererOffreComponent } from './gerer-offre/gerer-offre.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { UserListComponent } from './user-list/user-list.component';
     GererActualiteComponent,
     GererEvenementComponent,
     UserListComponent,
+    GererOffreComponent
 
   ],
   imports: [
