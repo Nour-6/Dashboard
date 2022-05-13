@@ -24,7 +24,14 @@
           <img src={{actualite?.imageUrl}} alt="rover" />
         </div>
         <div class="card-body">
-          <span class="tag tag-teal">{{actualite?.date}}</span>
+         <div class="widget-49">
+            <div class="widget-49-title-wrapper">
+                <div class="widget-49-date-primary">
+                    <span class="widget-49-date-day">{{actualite?.jour}}</span>
+                    <span class="widget-49-date-month">{{actualite?.mois}}</span>
+                </div>
+               </div>
+            </div>
           <h4>
             {{actualite?.titre}}
           </h4>
@@ -32,8 +39,8 @@
             {{actualite?.details}}
           </p>
             <div class="float-right btn-group btn-group-sm">
-               <a  *ngIf="showModeratorBoard  " (click)="onOpenModal(actualite, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
-               <a  *ngIf="showModeratorBoard  " (click)="onOpenModal(actualite, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
+               <a  *ngIf="showModeratorBoard  " (click)="onOpenModal(actualite, 'edit')" class="btn btn-primary " data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+               <a  *ngIf="showModeratorBoard  " (click)="onOpenModal(actualite, 'delete')" class="btn btn-secondary " data-placement="top" data-original-title="Delete"><i class="fa-solid fa-trash-can"></i></a>
             </div>
           </div>
         </div>
@@ -60,8 +67,12 @@
                  <input type="text" ngModel name="details" class="form-control" id="details" placeholder="details" required>
               </div>
               <div class="form-group">
-               <label for="details">Date</label>
-               <input type="text" ngModel name="date" class="form-control" id="date" placeholder="date" required>
+               <label for="details">Jour</label>
+               <input type="text" ngModel name="date" class="form-control" id="jour" placeholder="jour" required>
+            </div>
+            <div class="form-group">
+               <label for="details">Mois</label>
+               <input type="text" ngModel name="mois" class="form-control" id="mois" placeholder="mois" required>
             </div>
             <div class="form-group">
                <label for="details">ImageUrl </label>
@@ -105,11 +116,13 @@
                   <input type="text" ngModel="{{editActualite?.imageUrl}}" name="imageUrl" class="form-control" id="imageUrl" placeholder="ImageUrl">
                </div>
                <div class="form-group">
-                  <label for="message">Date</label>
-                  <input type="text" ngModel="{{editActualite?.date}}" name="date" class="form-control" id="date" placeholder="Date">
+                  <label for="details">Jour</label>
+                  <input type="text" ngModel="{{editActualite?.jour}}" name="jour" class="form-control" id="jour" placeholder="jour" required>
                </div>
-            
-              
+               <div class="form-group">
+                  <label for="details">Mois</label>
+                  <input type="text" ngModel="{{editActualite?.mois}}" name="mois" class="form-control" id="mois" placeholder="mois" required>
+               </div>
                 <div class="modal-footer">
                    <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
                    <button (click)="onUpdateActualite(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>

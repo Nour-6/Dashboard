@@ -94,7 +94,8 @@ export class GererActualiteComponent implements OnInit {
     for (const actualite of this.actualites) {
       if (actualite.titre.toLowerCase().indexOf(key.toLowerCase()) !== -1
       || actualite.details.toLowerCase().indexOf(key.toLowerCase()) !== -1
-      || actualite.date.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || actualite.jour.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || actualite.mois.toLowerCase().indexOf(key.toLowerCase()) !== -1
       ) {
         results.push(actualite);
       }

@@ -1,16 +1,16 @@
 <div class="row " id="main-container" >
    <div class="col-md-12 m-b-35">
-      <h3 class="title-5 m-b-35">Actualités</h3>
+      <h3 class="title-5 m-b-35">Evénements</h3>
        <div class="overview-wrap m-b-10">   
          <form  class="form-header" >
             <input class="au-input au-input--xl" type="search" (ngModelChange)="searchEvenements(key4.value)" #key4="ngModel" ngModel
-            name="key4" id="searchName4" placeholder="Rechercher des actualités..." required/>
+            name="key4" id="searchName4" placeholder="Rechercher des événements..." required/>
             <button class="au-btn--submit" type="submit">
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
         </form>
            <button class="au-btn au-btn-icon au-btn--blue" *ngIf="showModeratorBoard" (click)="onOpenModal(null, 'add')">
-            <i class="fa-solid fa-plus"></i> Ajouter Actualité
+            <i class="fa-solid fa-plus"></i> Ajouter Evénement
            </button>
        </div>
    </div>

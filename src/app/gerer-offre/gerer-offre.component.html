@@ -20,30 +20,27 @@
       <div class="card mb-3">
         <div class="card-body">
           <div class="d-flex flex-column flex-lg-row">
-            <img class="avatar me-4 " src="assets/recr.jpg" alt="">
+            <img class="avatar me-4 image-offre" src="assets/recr.jpg" alt="">
             <div class="row flex-fill">
-              <div class="col-sm-5">
+              <div class="col-lg-7 col-sm-5">
                 <h4 class="h5">{{offre?.titre}}</h4>
-                <span class="badge bg-secondary">Tunisia</span> <span class="badge bg-success">{{offre?.salaire}}</span>
-              </div>
-              <div class="col-sm-4 py-2">
-                <span class="badge bg-secondary">{{offre.profilRecherche}}</span>
+                <p><span class="badge bg-secondary">Profil recherché:</span> {{offre.profilRecherche}}</p>
+                <p><span class="badge bg-secondary">Type:</span> {{offre.type}}</p>
+                <p><span class="badge bg-secondary">Salaire:</span> {{offre.salaire}}</p>
               
               </div>
             </div>
           </div>
-        </div>
-  
-        <div   class="card-body">
           <div class="float-right btn-group btn-group-sm">
-             <a  *ngIf="showModeratorBoard  " (click)="onOpenModal(offre, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
-             <a  *ngIf="showModeratorBoard  " (click)="onOpenModal(offre, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
-          </div>
+            <a  *ngIf="showModeratorBoard  " (click)="onOpenModal(actualite, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+            <a  *ngIf="showModeratorBoard  " (click)="onOpenModal(actualite, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
+         </div>
+        </div>
        </div>
       </div>
       
     </div>
-    </div>
+ 
     
     <!-- Add Offre Modal -->
     <div class="modal fade" id="addOffreModal" tabindex="-1" role="dialog" aria-labelledby="addOffreModalLabel" aria-hidden="true">

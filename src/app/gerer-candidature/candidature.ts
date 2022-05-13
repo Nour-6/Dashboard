@@ -4,6 +4,7 @@ export interface Candidature {
     prenom: string;
     email: string;
     telephone: string;
+    projetprofessionnel: string;
     fichier: File;
   }
   

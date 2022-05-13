@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 export class GererCandidatureComponent implements OnInit {
 
   public candidatures: Candidature[];
-  public editCandidature: Candidature;
   public deleteCandidature: Candidature;
   
  
@@ -29,33 +28,6 @@ export class GererCandidatureComponent implements OnInit {
       (response: Candidature[]) => {
         this.candidatures = response;
         console.log(this.candidatures);
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
-  }
-
-  public onAddCandidature(addForm: NgForm): void {
-    document.getElementById('add-candidature-form').click();
-    this.candidatureService.addCandidature(addForm.value).subscribe(
-      (response: Candidature) => {
-        console.log(response);
-        this.getCandidatures();
-        addForm.reset();
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-        addForm.reset();
-      }
-    );
-  }
-
-  public onUpdateCandidature(candidature: Candidature): void {
-    this.candidatureService.updateCandidature(candidature).subscribe(
-      (response: Candidature) => {
-        console.log(response);
-        this.getCandidatures();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -99,14 +71,8 @@ export class GererCandidatureComponent implements OnInit {
     button.type = 'button';
     button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');
-    if (mode === 'add') {
-      button.setAttribute('data-target', '#addCandidatureModal');
-    }
-    if (mode === 'edit') {
-      this.editCandidature = candidature;
-      button.setAttribute('data-target', '#updateCandidatureModal');
-    }
     if (mode === 'delete') {
+      $("#deleteCandidatureModal").prependTo("body");
       this.deleteCandidature = candidature;
       button.setAttribute('data-target', '#deleteCandidatureModal');
     }

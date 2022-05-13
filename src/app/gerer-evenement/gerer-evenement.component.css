@@ -217,6 +217,7 @@
 
 .au-btn--blue {
   background: #4272d7;
+  border: none;
 }
 
 .au-btn--green {
@@ -344,7 +345,11 @@
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05);
     margin-bottom: 30px;
   }
-  
+  .card-header img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+  }
   .w-60 {
     width: 60px;
   }
@@ -405,13 +410,13 @@
 .tag-teal {
   background-color: #47bcd4;
 }
-.tag-purple {
-  background-color: #5e76bf;
-}
-.tag-pink {
-  background-color: #cd5b9f;
-}
-
+i {
+  color: white;
+  }
+  
+  a {
+  color: white;
+  }
 .card-body p {
   font-size: 13px;
   margin: 0 0 40px;
@@ -419,4 +424,5 @@
 .float-right{
   display: flex;
   margin-top: auto;
+  margin-left: 80%;
 }

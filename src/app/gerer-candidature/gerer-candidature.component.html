@@ -1,33 +1,53 @@
-
-
-  <div class="container" id="main-container">
-  <div class="row">
-   <form  *ngIf="router.url === '/gerer-candidature'" class="form-inline my-2 my-lg-0">
-      <input type="search" (ngModelChange)="searchCandidatures(key2.value)" #key2="ngModel" ngModel
-       name="key2" id="searchName2" class="form-control mr-sm-2" placeholder="Search candidatures..." required>
+<div class="row " id="main-container" >
+   <div class="col-md-12 m-b-35">
+      <h3 class="title-5 m-b-35">Candidatures</h3>
+       <div class="overview-wrap m-b-10">  
+         <form  class="form-header" >
+            <input class="au-input au-input--xl" type="search" (ngModelChange)="searchCandidatures(key2.value)" #key2="ngModel" ngModel
+       name="key2" id="searchName2" placeholder="Search candidatures..." required>
+       <button class="au-btn--submit" type="submit">
+         <i class="fa-solid fa-magnifying-glass"></i>
+       </button>
    </form>
-    <div *ngFor="let candidature of candidatures" class="col-md-6 col-xl-3">
-       <div class="card m-b-30">
-          <div class="card-body row">
-             <div class="col-6 card-title align-self-center mb-0">
-                <h5>{{candidature?.nom}}</h5>
+</div>
+</div>
+   <div class="table-responsive" id="proTeamScroll" tabindex="2" style="height: 400px; overflow: hidden; outline: none;">
+      <table class="table table-striped">
+          <thead>
+              <tr>
+                  <th>Nom</th>
+                  <th>Prenom</th> 
+                  <th>Projet Professionnel</th>
+                  <th>Email</th>
+                  <th>Tel</th>
+                  <th>CV</th>
+                  <th>Action</th>
+              </tr>
+          </thead>
+          <tbody *ngFor="let candidature of candidatures">
+              <tr>
+                  <td> <h6 class="mb-0 font-13">{{candidature?.nom}}</h6> </td>
+                  <td> <h6 class="mb-0 font-13">{{candidature?.prenom}}</h6> </td>
+                  <td> <p class="mb-0 font-13">{{candidature?.projetprofessionnel}}</p> </td>
+                 
+                  <td class="mb-0 font-13"><span class="block-email">{{candidature?.email}}</span></td>
+                  <td class="mb-0 font-13">{{candidature?.telephone}}</td>
+                  <td class="mb-0 font-13">{{candidature?.fichier}}</td>
+                
                
-             </div>
-          </div>
-          <ul class="list-group list-group-flush">
-             <li class="list-group-item"><i class="fa fa-envelope float-right"></i>{{candidature?.email}}</li>
-             <li class="list-group-item"><i class="fa fa-envelope float-right"></i>{{candidature?.telephone}}</li>
-             <li class="list-group-item"><i class="fa fa-envelope float-right"></i>{{candidature?.fichier}}</li>
-          </ul>
-          <div   class="card-body">
-             <div class="float-right btn-group btn-group-sm">
-               <!-- <a   (click)="onOpenModal(candidature, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>-->
-                <a   (click)="onOpenModal(candidature, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
-             </div>
-          </div>
-       </div>
-    </div>
+                  <td>
+                      <a (click)="onOpenModal(candidature, 'delete')" class="tooltips"  data-toggle="tooltip" title="" data-original-title="Delete"><i  class="far fa-trash-alt"></i></a>
+                      <a  data-toggle="tooltip" class="tooltips send-icon"  title="" data-original-title="Send"><i class="fa-solid fa-envelope"></i></a>
+                  </td>
+              </tr>
+       
+          </tbody>
+      </table>
   </div>
+  </div>
+
+
+
   
  
   <!-- Delete Modal -->
@@ -41,7 +61,7 @@
              </button>
           </div>
           <div class="modal-body">
-             <p>Are you sure you want to delete candidature {{deleteCandidature?.nom}}?</p>
+             <p>Etes-vous sûrs de vouloir supprimer la candidature de Mr/Mme {{deleteCandidature?.nom}}?</p>
              <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                 <button (click)="onDeleteCandidature(deleteCandidature?.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
@@ -49,7 +69,6 @@
           </div>
        </div>
     </div>
-  </div>
   </div>
   
   <!-- Notification for no employees -->

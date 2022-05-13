@@ -11,7 +11,7 @@ import { Router } from '@angular/router'
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
-
+  role: string;
   username: string;
   content: string;
   isLoggedIn = false
@@ -80,6 +80,31 @@ export class UserListComponent implements OnInit {
       }
     );
   }
+  public onUpdateManager(employee: Employee): void {
+    this.employeeService.updateManager(employee).subscribe(
+      (response: Employee) => {
+        console.log(response);
+        this.getEmployees();
+
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  public onUpdateAdmin(employee: Employee): void {
+    this.employeeService.updateAdmin(employee).subscribe(
+      (response: Employee) => {
+        console.log(response);
+        this.getEmployees();
+
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
 
   public onDeleteEmloyee(employeeId: number): void {
     this.employeeService.deleteEmployee(employeeId).subscribe(
@@ -122,6 +147,7 @@ export class UserListComponent implements OnInit {
     if (mode === 'edit') {
       $("#updateEmployeeModal").prependTo("body");
       this.editEmployee = employee;
+      this.role=employee.roles[0].name;
       button.setAttribute('data-target', '#updateEmployeeModal');
     }
     if (mode === 'delete') {

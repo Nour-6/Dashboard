@@ -3,6 +3,9 @@ import { NgForm } from '@angular/forms';
 import { WebSocketService } from './web-socket.service';
 import { ChatMessageDto } from './chatMessageDto';
 import { TokenStorageService } from '../_services/token-storage.service';
+import { Employee } from '../user-list/employee';
+import { HttpErrorResponse } from '@angular/common/http';
+import { EmployeeService } from '../user-list/employee.service';
 @Component({
   selector: 'chat',
   templateUrl: './chat.component.html',
@@ -10,10 +13,12 @@ import { TokenStorageService } from '../_services/token-storage.service';
 })
 export class ChatComponent implements OnInit, OnDestroy {
 use: string;
+public employees: Employee[];
 
-  constructor(public webSocketService: WebSocketService,private tokenStorage: TokenStorageService) { }
+  constructor(public webSocketService: WebSocketService,private tokenStorage: TokenStorageService,private employeeService: EmployeeService) { }
 
   ngOnInit(): void {
+    this.getEmployees();
     this.use = this.tokenStorage.getUser().username;
   
     console.log(name);
@@ -31,4 +36,30 @@ use: string;
     this.webSocketService.sendMessage(chatMessageDto);
     sendForm.controls.message.reset();
   }
+
+  public getEmployees(): void {
+    this.employeeService.getEmployees().subscribe(
+      (response: Employee[]) => {
+        this.employees = response;
+        
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+  public searchEmployees(key: string): void {
+    console.log(key);
+    const results: Employee[] = [];
+    for (const employee of this.employees) {
+      if (employee.prenom.toLowerCase().indexOf(key.toLowerCase()) !== -1  ) {
+        results.push(employee);
+      }
+    }
+    this.employees = results;
+    if (results.length === 0 || !key) {
+      this.getEmployees();
+    }
+  }
+  
 }

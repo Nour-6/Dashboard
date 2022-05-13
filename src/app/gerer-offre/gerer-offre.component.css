@@ -197,18 +197,15 @@
   background: #3868cd;
 }
 
-.au-btn--blue2 {
-  background: #00aced;
+.au-btn--blue {
+  background: #4272d7;
+  border: none;
 }
 
 .au-btn--blue2:hover {
   background: #00a2e3;
 }
 
-.au-btn--block {
-  display: block;
-  width: 100%;
-}
 
 .au-btn-icon i {
   vertical-align: baseline;
@@ -393,12 +390,6 @@
     flex: 1 1 auto;
     padding: 1.5rem 1.5rem;
 }
-
-
-.avatar {
-    width: 10rem;
-    height: 10rem;
-}
 .rounded-3 {
     border-radius: 0.5rem!important;
 }
@@ -408,10 +399,6 @@
 .me-4 {
     margin-right: 1.5rem!important;
 }
-  
-  a {
-    color: #707070;
-  }
   i {
   color: white;
   }
@@ -421,5 +408,8 @@
   }
   .image-offre{
     width:fit-content;
-    height: max-content;
+    min-height: max-content;
+  }
+  .float-right{
+    text-align: right;
   }
