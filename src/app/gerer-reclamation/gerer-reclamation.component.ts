@@ -81,6 +81,9 @@ export class GererReclamationComponent implements OnInit {
       if (reclamation.nom.toLowerCase().indexOf(key.toLowerCase()) !== -1
       || reclamation.email.toLowerCase().indexOf(key.toLowerCase()) !== -1
       || reclamation.prenom.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || reclamation.nom.toUpperCase().indexOf(key.toUpperCase()) !== -1
+      || reclamation.email.toUpperCase().indexOf(key.toUpperCase()) !== -1
+      || reclamation.prenom.toUpperCase().indexOf(key.toUpperCase()) !== -1
       
       ) {
         results.push(reclamation);

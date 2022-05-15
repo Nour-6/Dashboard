@@ -93,6 +93,10 @@ export class GererOffreComponent implements OnInit {
     for (const offre of this.offres) {
       if (offre.titre.toLowerCase().indexOf(key.toLowerCase()) !== -1
       || offre.profilRecherche.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || offre.type.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || offre.titre.toUpperCase().indexOf(key.toUpperCase()) !== -1
+      || offre.profilRecherche.toUpperCase().indexOf(key.toUpperCase()) !== -1
+      || offre.type.toUpperCase().indexOf(key.toUpperCase()) !== -1
       ) {
         results.push(offre);
       }

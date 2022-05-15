@@ -41,10 +41,10 @@
    </div>
    <!-- Add Evenement Modal -->
    <div class="modal fade" id="addEvenementModal" tabindex="-1" role="dialog" aria-labelledby="addEvenementModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-           <div class="modal-header">
-              <h5 class="modal-title" id="addEvenementModalLabel">Add Evenement</h5>
+      <div class="modal-dialog modal-dialog-centered" role="document">
+         <div class="modal-content border-0">
+           <div class="modal-header bg-info text-white">
+             <h5 class="modal-title text-white"id="addEvenementModalLabel">Add Evenement</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
               </button>
@@ -80,10 +80,10 @@
   
   <!-- Edit Modal -->
   <div class="modal fade" id="updateEvenementModal" tabindex="-1" role="dialog" aria-labelledby="evenementEditModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-       <div class="modal-content">
-          <div class="modal-header">
-             <h5 class="modal-title" id="updateEvenementModalLabel">Edit Evenement {{editEvenement?.titre}}</h5>
+   <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content border-0">
+        <div class="modal-header bg-info text-white">
+          <h5 class="modal-title text-white" id="updateEvenementModalLabel">Edit Evenement {{editEvenement?.titre}}</h5>
              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
              <span aria-hidden="true">&times;</span>
              </button>
@@ -122,10 +122,10 @@
   
   <!-- Delete Modal -->
   <div class="modal fade" id="deleteEvenementModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-       <div class="modal-content">
-          <div class="modal-header">
-             <h5 class="modal-title" id="deleteModelLabel">Delete Evenement</h5>
+   <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content border-0">
+        <div class="modal-header bg-info text-white">
+          <h5 class="modal-title text-white" id="deleteModelLabel">Delete Evenement</h5>
              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
              <span aria-hidden="true">&times;</span>
              </button>
@@ -144,7 +144,7 @@
   
   <!-- Notification for no evenements -->
   <div *ngIf="evenements?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
-  <div class="alert alert-info" role="alert">
+  <div class="alert alert-dark" role="alert">
     <h4 class="alert-heading">NO Actualités!</h4>
     <p>No Evenements were found.</p>
   </div>

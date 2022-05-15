@@ -3,5 +3,6 @@ export interface Offre {
     titre: string;
     profilRecherche: string;
     salaire:number;
+    type:string;
   }
   

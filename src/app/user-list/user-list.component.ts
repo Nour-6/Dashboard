@@ -124,6 +124,16 @@ export class UserListComponent implements OnInit {
     for (const employee of this.employees) {
       if (employee.username.toLowerCase().indexOf(key.toLowerCase()) !== -1
       || employee.email.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || employee.nom.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || employee.prenom.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || employee.sexe.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || employee.poste.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || employee.username.toUpperCase().indexOf(key.toUpperCase()) !== -1
+      || employee.email.toUpperCase().indexOf(key.toUpperCase()) !== -1
+      || employee.nom.toUpperCase().indexOf(key.toUpperCase()) !== -1
+      || employee.prenom.toUpperCase().indexOf(key.toUpperCase()) !== -1
+      || employee.sexe.toUpperCase().indexOf(key.toUpperCase()) !== -1
+      || employee.poste.toUpperCase().indexOf(key.toUpperCase()) !== -1
       ) {
         results.push(employee);
       }

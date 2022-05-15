@@ -34,7 +34,9 @@
   transition: all 0.5s ease;
 }
 
-
+.au-input:focus {
+  outline: none;
+}
 .au-input--full {
   width: 100%;
 }

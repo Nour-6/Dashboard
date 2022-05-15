@@ -95,6 +95,9 @@ export class GererEvenementComponent implements OnInit {
       if (evenement.titre.toLowerCase().indexOf(key.toLowerCase()) !== -1
       || evenement.details.toLowerCase().indexOf(key.toLowerCase()) !== -1
       || evenement.date.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || evenement.titre.toUpperCase().indexOf(key.toUpperCase()) !== -1
+      || evenement.details.toUpperCase().indexOf(key.toUpperCase()) !== -1
+      || evenement.date.toUpperCase().indexOf(key.toUpperCase()) !== -1
       ) {
         results.push(evenement);
       }

@@ -7,24 +7,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  img:String;
-  currentUser: any;
+  user:any;
+  public isUpdated = false;
 
-  constructor(private token: TokenStorageService,private router:Router) { }
+  constructor( private tokenStorage: TokenStorageService,private router:Router) { }
 
   ngOnInit(): void {
-    this.currentUser = this.token.getUser();
-    this.img=this.currentUser.imageUrl;
-    console.log(this.currentUser);
-    
-}
+    this.user = this.tokenStorage.getUser();
+    console.log(this.user);
 
-onSubmit(): void {
+  }
 
-      this.router.navigate(['/edit-profile']).then(() => {
-        window.location.reload();
-      });
-    }
-
-  
 }

@@ -8,47 +8,43 @@
   <div class="menu-sidebar__content js-scrollbar1">
       <nav class="navbar-sidebar">
           <ul class="list-unstyled navbar__list ">
-                <li  *ngIf="showAdminBoard">
-                    <a href="/admin"  routerLink="admin">
-                        <i class="fas fa-tachometer-alt"></i>Admin Board</a>
+                <li  *ngIf="showAdminBoard || showModeratorBoard || showUserBoard">
+                    <a [routerLink]="['/board']" [routerLinkActive]="['is-active'] " >
+                        <i class="fas fa-tachometer-alt"></i>Tableau de bord</a>
                 </li>
-                <li  *ngIf="showModeratorBoard">
-                    <a href="/mod"  routerLink="mod">
-                        <i class="fas fa-tachometer-alt"></i>Moderator Board</a>
-                  </li>
-                  <li  *ngIf="showUserBoard">
-                    <a href="/user"  routerLink="user">
-                        <i class="fas fa-tachometer-alt"></i>User Board</a>
-                  </li>
-              <li>
-                <a href="/employees"  *ngIf="isLoggedIn " routerLink="employees">
-                    <i class="fa-solid fa-user"></i>Users</a>
+              <li *ngIf="isLoggedIn ">
+                <a [routerLink]="['/employees']" [routerLinkActive]="['is-active'] "  >
+                    <i class="fa-solid fa-user"></i>Employés</a>
               </li>
               <li  *ngIf="showAdminBoard">
-                <a href="/gerer-candidature"   routerLink="gerer-candidature">
+                <a [routerLink]="['/gerer-candidature']" [routerLinkActive]="['is-active'] ">
                     <i class="fas fa-table"></i>Candidatures</a>
               </li>
          
               <li  *ngIf="showAdminBoard">
-                <a href="/gerer-reclamation"   routerLink="gerer-reclamation">
-                    <i class="fa-solid fa-message"></i>Reclamations</a>
+                <a [routerLink]="['/gerer-reclamation']" [routerLinkActive]="['is-active'] ">
+                    <i class="fa-solid fa-envelope"></i>Réclamations</a>
               </li>
-              <li  *ngIf="isLoggedIn ">
-                <a href="/gerer-actualite"   routerLink="gerer-actualite">
+              <li  *ngIf="isLoggedIn">
+                <a [routerLink]="['/projets']" [routerLinkActive]="['is-active'] ">
+                    <i class="fa-solid fa-list-check"></i>Projets</a>
+              </li>
+              <li  *ngIf="isLoggedIn">
+                <a [routerLink]="['/gerer-actualite']" [routerLinkActive]="['is-active'] ">
                     <i class="fa-solid fa-newspaper"></i>Actualités</a>
               </li>
               <li  *ngIf="isLoggedIn" >
-                <a href="/gerer-evenement"   routerLink="gerer-evenement">
-                    <i class="fa-solid fa-bell"></i>Evenements</a>
+                <a [routerLink]="['/gerer-evenement']" [routerLinkActive]="['is-active'] ">
+                    <i class="fa-solid fa-bell"></i>Evénements</a>
               </li>
               <li  *ngIf="showAdminBoard || showModeratorBoard ">
-                <a href="/gerer-offre"   routerLink="gerer-offre">
+                <a [routerLink]="['/gerer-offre']" [routerLinkActive]="['is-active'] " >
                     <i class="fas fa-table"></i>Offres d'emploi</a>
               </li>
             
               <li  *ngIf="isLoggedIn ">
-                <a href="/chat"   routerLink="chat">
-                    <i class="fa-brands fa-rocketchat"></i>Chat</a>
+                <a [routerLink]="['/chat']" [routerLinkActive]="['is-active'] ">
+                    <i class="fa-brands fa-rocketchat"></i>Discussion</a>
               </li>
               
              

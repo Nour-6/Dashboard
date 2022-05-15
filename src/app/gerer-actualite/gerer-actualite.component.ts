@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../_services/user.service';
 import { ActualiteService } from './actualite.service';
 import { Actualite } from './actualite';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -96,6 +95,10 @@ export class GererActualiteComponent implements OnInit {
       || actualite.details.toLowerCase().indexOf(key.toLowerCase()) !== -1
       || actualite.jour.toLowerCase().indexOf(key.toLowerCase()) !== -1
       || actualite.mois.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || actualite.titre.toUpperCase().indexOf(key.toUpperCase()) !== -1
+      || actualite.details.toUpperCase().indexOf(key.toUpperCase()) !== -1
+      || actualite.jour.toUpperCase().indexOf(key.toUpperCase()) !== -1
+      || actualite.mois.toUpperCase().indexOf(key.toUpperCase()) !== -1
       ) {
         results.push(actualite);
       }

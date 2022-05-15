@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
         this.successMessage = 'Login Successful';
-        this.router.navigate(['/admin']).then(() => {
+        this.router.navigate(['/board']).then(() => {
           window.location.reload();
         });
       },

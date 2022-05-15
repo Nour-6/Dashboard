@@ -25,4 +25,7 @@ export class CandidatureService {
   public deleteCandidature(candidatureId: number): Observable<void> {
     return this.http.delete<void>(`http://localhost:8080/candidature/delete/${candidatureId}`);
   }
+  public sendEmail(candidature: Candidature): Observable<void>{
+    return  this.http.post<void>(`http://localhost:8080/mail/sendcandidature`,candidature);
+  }
 }

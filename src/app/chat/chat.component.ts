@@ -52,7 +52,10 @@ public employees: Employee[];
     console.log(key);
     const results: Employee[] = [];
     for (const employee of this.employees) {
-      if (employee.prenom.toLowerCase().indexOf(key.toLowerCase()) !== -1  ) {
+      if (employee.prenom.toLowerCase().indexOf(key.toLowerCase()) !== -1 
+      || employee.nom.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || employee.nom.toUpperCase().indexOf(key.toUpperCase()) !== -1
+      || employee.prenom.toUpperCase().indexOf(key.toUpperCase()) !== -1  ) {
         results.push(employee);
       }
     }

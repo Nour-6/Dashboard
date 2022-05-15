@@ -14,7 +14,7 @@ export class GererCandidatureComponent implements OnInit {
 
   public candidatures: Candidature[];
   public deleteCandidature: Candidature;
-  
+  isSubmitted=false;
  
   constructor(private candidatureService: CandidatureService,public router: Router){}
 
@@ -54,6 +54,9 @@ export class GererCandidatureComponent implements OnInit {
       if (candidature.nom.toLowerCase().indexOf(key.toLowerCase()) !== -1
       || candidature.email.toLowerCase().indexOf(key.toLowerCase()) !== -1
       || candidature.prenom.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      ||candidature.nom.toUpperCase().indexOf(key.toUpperCase()) !== -1
+      || candidature.email.toUpperCase().indexOf(key.toUpperCase()) !== -1
+      || candidature.prenom.toUpperCase().indexOf(key.toUpperCase()) !== -1
       
       ) {
         results.push(candidature);
@@ -79,7 +82,22 @@ export class GererCandidatureComponent implements OnInit {
     container.appendChild(button);
     button.click();
   }
-
-
+ 
+  onClick(candidature: Candidature): void {
+    this.candidatureService.sendEmail(candidature).subscribe(
+      (response: any) => {
+        console.log(response);
+        this.isSubmitted=true;
+      }
+     ,
+      (error: HttpErrorResponse) => {
+      alert(error.message);
+  
+     }
+  
+     )
+  
+  
+  }
 
 }
