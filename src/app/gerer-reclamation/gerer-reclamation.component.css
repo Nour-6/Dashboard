@@ -497,12 +497,11 @@ th {
   -webkit-box-shadow: 0 0.4rem 0.6rem rgba(0,0,0,0.15);
   box-shadow: 0 0.4rem 0.6rem rgba(0,0,0,0.15);
 }
-.send-icon{
-  padding-left: 30%;
 
-}
 .send-icon i{
   color:rgb(29, 29, 29);
+  padding-right: 10px;
+  padding-left: 10px;
 }
 .block-email {
   font-size: 14px;
@@ -514,4 +513,8 @@ th {
   border-radius: 2px;
   line-height: 30px;
   padding: 0 14px;
+}
+
+.icons a:hover{
+  cursor: pointer;
 }

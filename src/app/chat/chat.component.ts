@@ -19,7 +19,7 @@ public employees: Employee[];
 
   ngOnInit(): void {
     this.getEmployees();
-    this.use = this.tokenStorage.getUser().username;
+    this.use = this.tokenStorage.getUser().prenom+' '+this.tokenStorage.getUser().nom;
   
     console.log(name);
     

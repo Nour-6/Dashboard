@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Actualite } from './actualite';
+import { Email } from './email';
 
 
 
@@ -26,8 +27,11 @@ export class ActualiteService {
   public deleteActualite(actualiteId: number): Observable<void> {
     return this.http.delete<void>(`http://localhost:8080/actualite/delete/${actualiteId}`);
   }
-}
-function actualite<T>(arg0: string, actualite: any): Observable<Actualite> {
-  throw new Error('Function not implemented.');
-}
 
+public sendEmailtrigger(email:String): Observable<void>{
+  return  this.http.post<void>(`http://localhost:8080/mail/sendtrigger`, email);
+}
+public getEmails(): Observable<Email[]> {
+  return this.http.get<Email[]>(`http://localhost:8080/email/all`);
+}
+}

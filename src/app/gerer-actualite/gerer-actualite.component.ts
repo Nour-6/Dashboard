@@ -5,13 +5,14 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { Router } from '@angular/router';
+import { Email } from './email';
 @Component({
   selector: 'app-gerer-actualite',
   templateUrl: './gerer-actualite.component.html',
   styleUrls: ['./gerer-actualite.component.css']
 })
 export class GererActualiteComponent implements OnInit {
-
+  public emails:Email[];
   public actualites: Actualite[];
   public editActualite: Actualite;
   public deleteActualite: Actualite;
@@ -50,8 +51,8 @@ export class GererActualiteComponent implements OnInit {
     document.getElementById('add-actualite-form').click();
     this.actualiteService.addActualite(addForm.value).subscribe(
       (response: Actualite) => {
-        console.log(response);
         this.getActualites();
+        
         addForm.reset();
        
       },
@@ -59,8 +60,24 @@ export class GererActualiteComponent implements OnInit {
         alert(error.message);
         addForm.reset();
       }
+    )
+
+    this.actualiteService.getEmails().subscribe(
+      (response: Email[]) => {
+        this.emails = response;
+        console.log(this.emails);
+        for(let i=0;i<this.emails.length;i++)
+          this.actualiteService.sendEmailtrigger(this.emails[i].value).subscribe();
+       
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
     );
+
+
   }
+
 
   public onUpdateActualite(actualite: Actualite): void {
     this.actualiteService.updateActualite(actualite).subscribe(

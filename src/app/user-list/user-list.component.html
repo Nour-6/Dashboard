@@ -4,7 +4,7 @@
        <div class="overview-wrap m-b-10">  
          <form  class="form-header" >
             <input class="au-input au-input--xl" type="search" (ngModelChange)="searchEmployees(key.value)" #key="ngModel" ngModel
-       name="key" id="searchName" placeholder="Rechercher un employé..." required>
+       name="key" id="searchName" placeholder="Chercher des employés..." required>
        <button class="au-btn--submit" type="submit">
          <i class="fa-solid fa-magnifying-glass"></i>
        </button>
@@ -35,7 +35,7 @@
                               
                                <td class="mb-0 font-13"><span class="block-email">{{employee?.email}}</span></td>
                                <td >
-                                  <div class="btn-group btn-group-sm">
+                                  <div class="btn-group btn-group-sm" *ngIf="employee?.roles[0]?.name!='ROLE_ADMIN'">
                                  <a  class="btn btn-primary "   title=""  data-original-title="Edit" *ngIf="showAdminBoard" (click)="onOpenModal(employee, 'edit')"data-placement="top" ><i class="fa fa-pencil"></i> </a>
                                  <a  class="btn btn-secondary"  title="" data-original-title="Delete" *ngIf="showAdminBoard" (click)="onOpenModal(employee, 'delete')" data-placement="top"><i class="fa-solid fa-trash-can"></i></a>
                               </div>
@@ -201,7 +201,7 @@
                </button>
             </div>
             <div class="modal-body">
-               <p>Etes-vous sûrs de vouloir supprimer l'employé {{deleteEmployee?.username}}?</p>
+               <p>Etes-vous sûrs de vouloir supprimer l'employé {{deleteEmployee?.nom}} {{deleteEmployee?.prenom}}?</p>
                <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                   <button (click)="onDeleteEmloyee(deleteEmployee?.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>

@@ -2,9 +2,9 @@
    <div class="col-md-12 m-b-35">
       <h3 class="title-5 m-b-35">Evénements</h3>
        <div class="overview-wrap m-b-10">   
-         <form  class="form-header" >
+         <form  class="form-header " >
             <input class="au-input au-input--xl" type="search" (ngModelChange)="searchEvenements(key4.value)" #key4="ngModel" ngModel
-            name="key4" id="searchName4" placeholder="Rechercher des événements..." required/>
+            name="key4" id="searchName4" placeholder="Chercher des événements..." required/>
             <button class="au-btn--submit" type="submit">
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
@@ -44,7 +44,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content border-0">
            <div class="modal-header bg-info text-white">
-             <h5 class="modal-title text-white"id="addEvenementModalLabel">Add Evenement</h5>
+             <h5 class="modal-title text-white"id="addEvenementModalLabel">Ajouter Evenement</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
               </button>
@@ -69,8 +69,8 @@
             </div>
           
               <div class="modal-footer">
-                 <button type="button" id="add-evenement-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                 <button [disabled]="addForm2.invalid"  type="submit" class="btn btn-primary" >Save changes</button>
+                 <button type="button" id="add-evenement-form" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                 <button [disabled]="addForm2.invalid"  type="submit" class="btn btn-primary" >Enregistrer</button>
               </div>
               </form>
            </div>

@@ -15,6 +15,7 @@ export class GererReclamationComponent implements OnInit {
   public reclamations: Reclamation[];
   public editReclamation: Reclamation;
   public deleteReclamation: Reclamation;
+  public showReclamation: Reclamation;
  
   constructor(private reclamationService: ReclamationService,public router:Router){}
 
@@ -106,6 +107,11 @@ export class GererReclamationComponent implements OnInit {
       $("#deleteReclamationModal").prependTo("body");
       this.deleteReclamation = reclamation;
       button.setAttribute('data-target', '#deleteReclamationModal');
+    }
+    if (mode === 'show') {
+      $("#loupeModal").prependTo("body");
+      this.showReclamation = reclamation;
+      button.setAttribute('data-target', '#loupeModal');
     }
     container.appendChild(button);
     button.click();
